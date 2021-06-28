@@ -1,0 +1,31 @@
+syntax = "proto3";  //指定版本信息，不指定会报错
+package pb; //后期生成go文件的包名
+option go_package = "./;pb";
+
+//message为关键字，作用为定义一种消息类型
+message Person{
+    string name = 1;
+    int32  age = 2 ;
+    //定义一个message
+    message PhoneNumber {
+        string number = 1;
+        PhoneType type = 2;
+    }
+    repeated PhoneNumber phone = 3;
+    
+    oneof data{
+        string school = 5;
+        int32 score = 6;
+    }
+}
+
+//enum为关键字，作用为定义一种枚举类型
+enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+}
+
+service HelloService {
+    rpc Hello (Person)returns (Person);
+}
