@@ -1,0 +1,15 @@
+syntax = "proto3"; 				//指定版本信息
+package pb;						//后期生成go文件的包名
+option go_package = "./;pb";
+
+message Teacher{
+    //   名字
+    string name = 1;
+    //   年龄
+    int32  age = 2 ;
+}
+
+//定义RPC服务
+service TeacherService {
+    rpc SayHi (Teacher)returns (Teacher);
+}
